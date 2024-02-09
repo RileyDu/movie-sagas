@@ -36,7 +36,7 @@ const movies = (state = [], action) => {
   }
 }
 
-// Used to store the movie genres
+// Used to store the movie genres STRETCH GOAL
 const genres = (state = [], action) => {
   switch (action.type) {
     case 'SET_GENRES':

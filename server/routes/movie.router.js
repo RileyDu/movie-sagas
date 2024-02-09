@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res) => { //STRETCH GOAL
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie
   const insertMovieQuery = `
