@@ -37,7 +37,7 @@ router.get("/:id", (req, res) => {
       res.send(result.rows);
     })
     .catch((err) => {
-      console.log("ERROR: Get all movies", err);
+      console.log("ERROR: Get a movies details", err);
       res.sendStatus(500);
     });
 });

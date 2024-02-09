@@ -5,8 +5,6 @@ import Details from '../Details/Details';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-
-
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
