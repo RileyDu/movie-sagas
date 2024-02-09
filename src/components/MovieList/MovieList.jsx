@@ -8,17 +8,16 @@ function MovieList() {
   const dispatch = useDispatch();
   const movies = useSelector(store => store.movies);
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_MOVIES' });
-  }, []);
 
   return (
     <main>
       <h1>MovieList</h1>
+      {/* <p>{JSON.stringify(movies)}</p> */}
       <section className="movies">
-        {movies.map(movie => {
+        
+        {movies.map(movie => 
           <MovieListItem movie={ movie } />
-        })}
+        )}
       </section>
     </main>
   );
