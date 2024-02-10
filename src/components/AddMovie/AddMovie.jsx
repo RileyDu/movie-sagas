@@ -55,7 +55,6 @@ export default function AddMovie() {
             />
             <label for="floatingInput">Enter Movie Title Here</label>
           </div>
-
           <div class="form-floating mb-3">
             <input
               type="url"
@@ -67,17 +66,30 @@ export default function AddMovie() {
             <label for="floatingInput">Enter Movie Poster URL Here</label>
           </div>
           <div class="form-floating mb-3">
-            <input
+            <textarea
               type="text"
               class="form-control"
-              id="floatingInput"
+              id="textArea"
               value={movieDescription}
               onChange={handleInputChangeDesc}
+              rows="5"
             />
-            <label for="floatingInput">Enter Movie Description</label>
+            <label for="textArea">Enter Movie Description</label>
           </div>
-          <input type="text" name="" placeholder="DROPDOWN PLACEHOLDER" id="" />
-          {/* use genre reducer for dropdown */}
+
+        </div>
+        <div class="form-group form-floating mb-3">
+
+          <select class="form-select" id="exampleSelect1" r>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+          <label for="exampleSelect1" >
+            Select Genre
+          </label>
         </div>
       </form>
       <Button onClick={() => history.push(`/`)}>GO BACK</Button>
