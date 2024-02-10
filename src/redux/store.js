@@ -24,17 +24,17 @@ function* fetchAllMovies() {
   }
 }
 
-function* fetchDetails() {
+function* fetchDetails(action) {
   try {
     // Get the movies:
-    const moviesResponse = yield axios.get('/api/movies');
+    const detailsResponse = yield axios.get(`/api/movies/${action.payload}`);
     // Set the value of the movies reducer:
     yield put({
       type: 'SET_DETAILS',
-      payload: moviesResponse.data
+      payload: detailsResponse.data[0]
     });
   } catch (error) {
-    console.log('fetchAllMovies error:', error);
+    console.log('fetchDetails error:', error);
   }
 }
 
@@ -42,7 +42,7 @@ function* fetchDetails() {
 const sagaMiddleware = createSagaMiddleware();
 
 // Used to store details for the movie that user clicked on
-const details = (state = [], action) => {
+const details = (state = {}, action) => {
   switch (action.type) {
     case 'SET_DETAILS':
       return action.payload;

@@ -27,7 +27,7 @@ router.get("/:id", (req, res) => {
   FROM "movies"
   JOIN "movies_genres" on "movies"."id"="movies_genres"."movie_id"
   JOIN "genres" on "genres"."id"="movies_genres"."genre_id"
-  WHERE "movies"."id"=1
+  WHERE "movies"."id"=$1
   GROUP BY "movies"."title", "movies"."description", "movies"."poster"
   ORDER BY "title" ASC;
   `;
