@@ -12,9 +12,10 @@ export default function AddMovie() {
   const [movieTitle, setMovieTitle] = useState("");
   const [moviePoster, setMoviePoster] = useState("");
   const [movieDescription, setMovieDescription] = useState("");
-  const [movieGenre, setMovieGenre] = useState('');
+  const [movieGenre, setMovieGenre] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
-//   console.log("what is a genre?", genres);
+  //   console.log("what is a genre?", genres);
 
   const handleInputChangeTitle = (e) => {
     setMovieTitle(e.target.value);
@@ -37,6 +38,12 @@ export default function AddMovie() {
 
   function postMovie() {
     console.log("checking payload of submit", movieData);
+
+    if (!movieTitle || !moviePoster || !movieDescription || !movieGenre) {
+      setShowAlert(true);
+      return;
+    }
+
     dispatch({
       type: "POST_MOVIE",
       payload: movieData,
@@ -44,7 +51,8 @@ export default function AddMovie() {
     setMovieTitle("");
     setMoviePoster("");
     setMovieDescription("");
-    setMovieGenre('')
+    setMovieGenre("");
+    history.push(`/`);
   }
 
   useEffect(() => {
@@ -53,7 +61,18 @@ export default function AddMovie() {
 
   return (
     <>
-      <form action="">
+      {showAlert && (
+        <div className="alert alert-dismissible alert-danger">
+          <button
+            type="button"
+            className="btn-close"
+            onClick={() => setShowAlert(false)}
+          ></button>
+          <strong>Oh snap!</strong> Change a few things up and try submitting
+          again.
+        </div>
+      )}
+      <form>
         <div class="form-group">
           <div class="form-floating mb-3">
             <input
@@ -88,17 +107,17 @@ export default function AddMovie() {
           </div>
         </div>
         <div class="form-group form-floating mb-3">
-
           <select
             class="form-select"
             id="genreSelect"
             value={movieGenre}
             onChange={(e) => {
-                const selectedGenre = e.target.value;
-                console.log('Selected Genre from user:', selectedGenre);
+              const selectedGenre = e.target.value;
+              console.log("Selected Genre from user:", selectedGenre);
               setMovieGenre(selectedGenre);
             }}
           >
+            <option value=""> Select Genre </option>
             {genres.map((genre) => (
               <option key={genre.id} value={genre.id}>
                 {genre.name}
@@ -111,7 +130,6 @@ export default function AddMovie() {
       <Button onClick={() => history.push(`/`)}>GO BACK</Button>
       <Button
         onClick={() => {
-          history.push(`/`);
           postMovie();
         }}
       >
