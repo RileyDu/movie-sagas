@@ -4,20 +4,26 @@ import './App.css';
 import Details from '../Details/Details';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import AddMovie from '../AddMovie/AddMovie';
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch({ type: 'FETCH_MOVIES' });
   }, []);
+
   return (
+    <>
     <div className="App">
       <h1>The Movies Saga!</h1>
       <Router>        
         <Route path="/" exact>
           <MovieList />
         </Route>
-        
+        <Route path="/addMovie">
+          <AddMovie />
+        </Route>
         <Route path="/details/:id">
         <Details />
         </Route>
@@ -25,6 +31,7 @@ function App() {
         {/* Add Movie page */}
       </Router>
     </div>
+    </>
   );
 }
 
