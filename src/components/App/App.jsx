@@ -36,3 +36,12 @@ function App() {
 }
 
 export default App;
+
+// MovieListItem Image Card
+// MovieList Grid
+// Detail page Image Card
+// Detail page delete button
+
+// Code Comments
+// Read Me
+// Formatting

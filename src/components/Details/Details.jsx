@@ -25,7 +25,6 @@ export default function Details() {
 
   return (
     <>
-      <h1>IN DETAILS PAGE</h1>
       <ul>
         <li>{details.title}</li>
         <li>{details.description}</li>
