@@ -23,14 +23,14 @@ export default function Details() {
 
   return (
     <>
-      <h1>IN DETAILS PAGE</h1>
-      <ul>
-        <li>{details.title}</li>
+      <h1 >IN DETAILS PAGE</h1>
+      <ul data-testid="movieDetails">
+        <li >{details.title}</li>
         <li>{details.description}</li>
-        <li>{details.poster}</li>
+        <li><img src={details.poster} alt={details.title} /></li>
         <li>{details.genre}</li>
       </ul>
-      <button onClick={() => history.push(`/`)}>BACK TO HOME</button>
+      <button onClick={() => history.push(`/`)} data-testid="toList">BACK TO HOME</button>
     </>
   );
 }
