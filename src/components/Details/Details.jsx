@@ -27,7 +27,7 @@ export default function Details() {
       <ul>
         <li>{details.title}</li>
         <li>{details.description}</li>
-        <li>{details.poster}</li>
+        <li><img src={details.poster} alt={details.title} /></li>
         <li>{details.genre}</li>
       </ul>
       <button onClick={() => history.push(`/`)}>BACK TO HOME</button>
