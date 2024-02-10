@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css';
 import MovieListItem from '../MovieListItem/MovieListItem';
 import { useHistory } from "react-router-dom";
+import { Button } from 'react-bootstrap';
 
 function MovieList() {
   const history = useHistory();
@@ -13,7 +14,7 @@ function MovieList() {
   return (
     <main>
       <h1>MovieList</h1>
-      <button  onClick={() => history.push(`/addMovie`)}>ADD NEW MOVIE</button>
+      <Button  onClick={() => history.push(`/addMovie`)}>ADD NEW MOVIE</Button>
       {/* <p>{JSON.stringify(movies)}</p> */}
       <section className="movies">
         
