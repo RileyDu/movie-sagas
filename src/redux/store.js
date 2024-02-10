@@ -8,6 +8,21 @@ import axios from 'axios';
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchAllMovies)
   yield takeEvery('FETCH_DETAILS', fetchDetails);
+  yield takeEvery('ADD_MOVIE', addOneMovie);
+}
+
+function* addOneMovie() {
+  try {
+    // Get the movies:
+    yield axios.post('/api/movies', action.payload);
+    // // Set the value of the movies reducer:
+    // yield put({
+    //   type: 'SET_MOVIES',
+    //   payload: moviesResponse.data
+    // });
+  } catch (error) {
+    console.log('fetchAllMovies error:', error);
+  }
 }
 
 function* fetchAllMovies() {
