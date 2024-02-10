@@ -8,6 +8,20 @@ import axios from 'axios';
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchAllMovies)
   yield takeEvery('FETCH_DETAILS', fetchDetails);
+  yield takeEvery('POST_MOVIE', postMovie);
+}
+
+function* postMovie(action) {
+  try {
+    // Get the movies:
+    yield axios.post('/api/movies', action.payload);
+    // // Set the value of the movies reducer:
+    yield put({
+      type: 'FETCH_MOVIES'
+    });
+  } catch (error) {
+    console.error('postMovie error:', error);
+  }
 }
 
 function* fetchAllMovies() {
