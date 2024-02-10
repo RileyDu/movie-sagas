@@ -12,7 +12,7 @@ export default function AddMovie() {
   const [movieTitle, setMovieTitle] = useState("");
   const [moviePoster, setMoviePoster] = useState("");
   const [movieDescription, setMovieDescription] = useState("");
-  const [movieGenre, setMovieGenre] = useState({ id: "", name: "" });
+  const [movieGenre, setMovieGenre] = useState('');
 
 //   console.log("what is a genre?", genres);
 
@@ -32,7 +32,7 @@ export default function AddMovie() {
     title: movieTitle,
     poster: moviePoster,
     description: movieDescription,
-    genre_id: movieGenre.id,
+    genre_id: movieGenre,
   };
 
   function postMovie() {
@@ -44,10 +44,7 @@ export default function AddMovie() {
     setMovieTitle("");
     setMoviePoster("");
     setMovieDescription("");
-    setMovieGenre({
-        id:'',
-        name: ''
-    })
+    setMovieGenre('')
   }
 
   useEffect(() => {
@@ -92,19 +89,15 @@ export default function AddMovie() {
           </div>
         </div>
         <div class="form-group form-floating mb-3">
-        {genres && genres.length > 0 ? (
+
           <select
             class="form-select"
             id="genreSelect"
-            value={movieGenre.id}
+            value={movieGenre}
             onChange={(e) => {
                 const selectedGenre = e.target.value;
                 console.log('Selected Genre from user:', selectedGenre);
-            //   const THEGenre = genres.find(
-            //     (genre) => genre.id === selectedGenre
-            //   );
-            //   console.log("What is in the genre", THEGenre);
-              setMovieGenre({id: selectedGenre});
+              setMovieGenre(selectedGenre);
             }}
           >
             {genres.map((genre) => (
@@ -113,9 +106,6 @@ export default function AddMovie() {
               </option>
             ))}
           </select>
-        ) : (
-            <p>Loading genres...</p>
-        )}
           <label for="genreSelect">Select Genre</label>
         </div>
       </form>
