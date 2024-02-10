@@ -13,7 +13,6 @@ function MovieList() {
 
   return (
     <main>
-      <h1>MovieList</h1>
       <Button  onClick={() => history.push(`/addMovie`)}>ADD NEW MOVIE</Button>
       {/* <p>{JSON.stringify(movies)}</p> */}
       <section className="movies">

@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Button } from "react-bootstrap";
+
 
 export default function Details() {
   const params = useParams();
@@ -30,7 +32,7 @@ export default function Details() {
         <li><img src={details.poster} alt={details.title} /></li>
         <li>{details.genre}</li>
       </ul>
-      <button onClick={() => history.push(`/`)}>BACK TO HOME</button>
+      <Button onClick={() => history.push(`/`)}>BACK TO HOME</Button>
     </>
   );
 }

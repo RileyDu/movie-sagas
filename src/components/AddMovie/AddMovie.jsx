@@ -53,7 +53,6 @@ export default function AddMovie() {
 
   return (
     <>
-      <h1>IN ADD MOVIE </h1>
       <form action="">
         <div class="form-group">
           <div class="form-floating mb-3">
