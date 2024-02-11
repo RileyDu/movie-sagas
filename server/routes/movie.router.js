@@ -6,7 +6,7 @@ const pool = require("../modules/pool");
 router.get("/", (req, res) => {
   const query = `
     SELECT * FROM "movies"
-      ORDER BY "title" ASC;
+      ORDER BY "id" ASC;
   `;
   pool
     .query(query)
@@ -42,9 +42,10 @@ router.get("/:id", (req, res) => {
     });
 });
 
+//EDIT PAGE PUT
 router.put("/:id", (req, res) => {
   const updatedMovie = req.body;
-  // req.body should contain a category_id to add to this favorite image
+  // req.body should contain the data needed for PUT
   const queryText = `
     UPDATE "movies"
       SET 
@@ -65,6 +66,8 @@ router.put("/:id", (req, res) => {
     });
 });
 
+// EDIT PAGE DELETE
+/* DELETE BUTTON MIGHT NEED A DB.SQL ADJUSTMENT FOR CASCADE TO WORK, CHECK database.sql FILE IF NOT WORKING */
 router.delete("/:id", (req, res) => {
   pool
     .query('DELETE FROM "movies" WHERE id=$1', [req.params.id])
@@ -77,6 +80,7 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+// given this, used in AddMovie
 router.post("/", (req, res) => {
   //STRETCH GOAL
   console.log(req.body);
