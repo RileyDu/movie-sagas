@@ -5,15 +5,15 @@ import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 export default function AddMovie() {
+  const genres = useSelector((store) => store.genres); // populates the dropdown with genres from db using reducer
   const history = useHistory();
   const dispatch = useDispatch();
-  const genres = useSelector((store) => store.genres);
 
   const [movieTitle, setMovieTitle] = useState("");
   const [moviePoster, setMoviePoster] = useState("");
   const [movieDescription, setMovieDescription] = useState("");
-  const [movieGenre, setMovieGenre] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
+  const [movieGenre, setMovieGenre] = useState(""); // local state used for form submission
+  const [showAlert, setShowAlert] = useState(false); //false to start then alert appears if form values are empty
 
   //   console.log("what is a genre?", genres);
 
@@ -27,40 +27,42 @@ export default function AddMovie() {
 
   const handleInputChangeDesc = (e) => {
     setMovieDescription(e.target.value);
-  };
+  }; // each of these is setting the local state for the inputs
+  // genres doesn't have one because dropdown
 
   const movieData = {
     title: movieTitle,
     poster: moviePoster,
     description: movieDescription,
     genre_id: movieGenre,
-  };
+  }; // an object to post to the db using the keys needed for db and grabbing values from local state
 
   function postMovie() {
-    console.log("checking payload of submit", movieData);
+    console.log("checking payload of submit", movieData); // used to check if values and keys are populated and correct
 
     if (!movieTitle || !moviePoster || !movieDescription || !movieGenre) {
       setShowAlert(true);
       return;
-    }
+    } // empty input on form alerts user
 
     dispatch({
-      type: "POST_MOVIE",
-      payload: movieData,
+      type: "POST_MOVIE", // tell the rootsaga we got a payload coming in
+      payload: movieData, // object of form data that eventually talks to axios post to db
     });
     setMovieTitle("");
     setMoviePoster("");
     setMovieDescription("");
-    setMovieGenre("");
-    history.push(`/`);
+    setMovieGenre(""); // resets form inputs
+    history.push(`/`); // takes user back to home with successful submission
   }
 
   useEffect(() => {
     dispatch({ type: "FETCH_GENRES" });
-  }, []);
+  }, []); // called when page loads to populate dropdown with genres to assign
 
   return (
     <>
+      {/* THIS IS HIDDEN UNTIL USER TRIGGERS A BAD SUBMIT OF FORM */}
       {showAlert && (
         <div className="alert alert-dismissible alert-danger">
           <button
@@ -106,6 +108,7 @@ export default function AddMovie() {
             <label for="textArea">Enter Movie Description</label>
           </div>
         </div>
+        {/* above is 3 inputs of text for the db, uses local state to keep record and bootstrap to style */}
         <div class="form-group form-floating mb-3 container">
           <select
             class="form-select"
@@ -117,25 +120,22 @@ export default function AddMovie() {
               setMovieGenre(selectedGenre);
             }}
           >
+            {/* onChange assigns the selected value to local state */}
             <option value=""> Select Genre </option>
+            {/* make shift placeholder above */}
             {genres.map((genre) => (
               <option key={genre.id} value={genre.id}>
                 {genre.name}
               </option>
             ))}
           </select>
+          {/* map thrue the genres in select of dropdown */}
           <label for="genreSelect">Select Genre</label>
         </div>
       </form>
-      <hr/>
+      <hr />
       <Button onClick={() => history.push(`/`)}>GO BACK</Button>
-      <Button
-        onClick={() => {
-          postMovie();
-        }}
-      >
-        ADD MOVIE
-      </Button>
+      <Button onClick={() => {postMovie();}}>ADD MOVIE</Button>
     </>
   );
 }
