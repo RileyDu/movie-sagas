@@ -26,7 +26,7 @@
     "vitest": "^1.1.0"
   },
   "scripts": {
-    "start": "node server/server.js | vite",
+    "start": "node server/server.js",
     "client": "vite",
     "server": "nodemon --watch server server/server.js",
     "build": "vite build",
