@@ -41,9 +41,6 @@ function App() {
 
 export default App;
 
-
-
-// Detail page delete button
 // Code Comments
 // Read Me
 // Formatting
