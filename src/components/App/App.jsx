@@ -42,9 +42,8 @@ function App() {
 export default App;
 
 
-// Detail page Image Card
-// Detail page delete button
 
+// Detail page delete button
 // Code Comments
 // Read Me
 // Formatting

@@ -21,6 +21,11 @@ CREATE TABLE "movies_genres" (
   "genre_id" INT REFERENCES "genres" NOT NULL
 );
 
+ALTER TABLE movies_genres
+DROP CONSTRAINT movies_genres_movie_id_fkey,
+ADD CONSTRAINT movies_genres_movie_id_fkey
+FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE;
+
 --------[ DATA! ]---------
 
 -- Starter movies

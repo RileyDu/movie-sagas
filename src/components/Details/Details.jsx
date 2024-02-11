@@ -21,6 +21,14 @@ export default function Details() {
     return <h1>Loading...</h1>;
   }
 
+  function deleteMovie(){
+    dispatch({
+      type: "DELETE_MOVIE",
+      payload: params.id,
+    });
+    history.push(`/`);
+  }
+
   return (
     <>
     <hr/>
@@ -53,7 +61,7 @@ export default function Details() {
         >
           EDIT
         </button>
-        <button type="button" class="btn btn-secondary">
+        <button type="button" class="btn btn-secondary" onClick={() => deleteMovie()}>
           DELETE
         </button>
       </div>

@@ -11,6 +11,7 @@ function* rootSaga() {
   yield takeEvery('POST_MOVIE', postMovie);
   yield takeEvery('FETCH_GENRES', fetchGenresSaga);
   yield takeEvery('EDIT_MOVIE', editMovieSaga)
+  yield takeEvery('DELETE_MOVIE', deleteMovieSaga)
 }
 
 function* postMovie(action) {
@@ -29,13 +30,24 @@ function* postMovie(action) {
 function* editMovieSaga(action) {
   try {
     // Get the movies:
-    yield axios.put(`/api/movies/${action.payload.id}`, action.payload);
+    yield axios.put(`/api/movies/${action.payload}`);
     // // Set the value of the movies reducer:
     yield put({
       type: 'FETCH_MOVIES'
     });
   } catch (error) {
     console.error('editMovie error:', error);
+  }
+}
+
+function* deleteMovieSaga(action) {
+  try {
+    yield axios.delete(`/api/movies/${action.payload}`);
+    yield put({
+      type: 'FETCH_MOVIES'
+    });
+  } catch (error) {
+    console.error('deleteMovie error:', error);
   }
 }
 
