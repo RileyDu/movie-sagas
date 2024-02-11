@@ -5,7 +5,7 @@ export default function MovieListItem({ movie }) {
   return (
       <div onClick={() => history.push(`/details/${movie.id}`)}>
         <div class="card">
-          <img src={movie.poster} class="card-img-top" alt={movie.title} />
+          <img src={movie.poster} alt={movie.title} />
         </div>
       </div>
   );

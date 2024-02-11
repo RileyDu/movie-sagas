@@ -5,6 +5,7 @@ import Details from '../Details/Details';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import AddMovie from '../AddMovie/AddMovie';
+import EditPage from '../EditPage/EditPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +29,9 @@ function App() {
         <Route path="/details/:id">
         <Details />
         </Route>
-        
+        <Route path='/edit'>
+        <EditPage />
+        </Route>
         {/* Add Movie page */}
       </Router>
     </div>

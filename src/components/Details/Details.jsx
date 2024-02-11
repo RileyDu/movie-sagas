@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Button } from "react-bootstrap";
 
-
 export default function Details() {
   const params = useParams();
   const details = useSelector((store) => store.details);
@@ -17,7 +16,7 @@ export default function Details() {
     dispatch({ type: "FETCH_DETAILS", payload: params.id });
   }, [params.id]);
 
-//   console.log("details content", details);
+  //   console.log("details content", details);
 
   if (params.id === undefined) {
     return <h1>Loading...</h1>;
@@ -28,10 +27,26 @@ export default function Details() {
       <ul>
         <li>{details.title}</li>
         <li>{details.description}</li>
-        <li><img src={details.poster} alt={details.title} /></li>
+        <li>
+          <img src={details.poster} alt={details.title} />
+        </li>
         <li>{details.genre}</li>
       </ul>
-      <Button onClick={() => history.push(`/`)}>BACK TO HOME</Button>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onClick={() => history.push(`/`)}
+        >
+          HOME
+        </button>
+        <button type="button" class="btn btn-secondary"  onClick={() => history.push(`/edit`)}>
+          EDIT
+        </button>
+        <button type="button" class="btn btn-secondary">
+          DELETE
+        </button>
+      </div>
     </>
   );
 }
