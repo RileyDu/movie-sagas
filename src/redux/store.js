@@ -14,43 +14,10 @@ function* rootSaga() {
   yield takeEvery('DELETE_MOVIE', deleteMovieSaga)
 }
 
-function* postMovie(action) {
-  try {
-    // Get the movies:
-    yield axios.post('/api/movies', action.payload);
-    // // Set the value of the movies reducer:
-    yield put({
-      type: 'FETCH_MOVIES'
-    });
-  } catch (error) {
-    console.error('postMovie error:', error);
-  }
-}
 
-function* editMovieSaga(action) {
-  try {
-    // Get the movies:
-    yield axios.put(`/api/movies/${action.payload}`);
-    // // Set the value of the movies reducer:
-    yield put({
-      type: 'FETCH_MOVIES'
-    });
-  } catch (error) {
-    console.error('editMovie error:', error);
-  }
-}
+// SAGAS!! (generators?)
 
-function* deleteMovieSaga(action) {
-  try {
-    yield axios.delete(`/api/movies/${action.payload}`);
-    yield put({
-      type: 'FETCH_MOVIES'
-    });
-  } catch (error) {
-    console.error('deleteMovie error:', error);
-  }
-}
-
+//UseEffect calls this function when page loads, GETs all movies from DB
 function* fetchAllMovies() {
   try {
     // Get the movies:
@@ -65,11 +32,12 @@ function* fetchAllMovies() {
   }
 }
 
+//AddMovie page useEffect calls this to populate the drop down menue
 function* fetchGenresSaga() {
   try {
     // Get the movies:
     const genresResponse = yield axios.get('/api/genres');
-    // Set the value of the movies reducer:
+    // Set the value of the genres reducer:
     yield put({
       type: 'SET_GENRES',
       payload: genresResponse.data
@@ -79,23 +47,68 @@ function* fetchGenresSaga() {
   }
 }
 
+//Details page gets the specified movies data from db
 function* fetchDetails(action) {
   try {
-    // Get the movies:
-    const detailsResponse = yield axios.get(`/api/movies/${action.payload}`);
-    // Set the value of the movies reducer:
+    // Get the movies details:
+    const detailsResponse = yield axios.get(`/api/movies/${action.payload}`); // this is the id of the movie that was clicked
+    // Set the value of the details reducer:
     yield put({
       type: 'SET_DETAILS',
-      payload: detailsResponse.data[0]
+      payload: detailsResponse.data[0]//its in an array of 1, can now access as an object
     });
   } catch (error) {
     console.log('fetchDetails error:', error);
   }
 }
 
+// Add movie form uses this generator to add a movie to db
+function* postMovie(action) {
+  try {
+    // Post the form data of user submit to the db
+    yield axios.post('/api/movies', action.payload); // giving the server the form data
+    
+    yield put({
+      type: 'FETCH_MOVIES' // calling the fetch to rerender the new movie in the db
+    });
+  } catch (error) {
+    console.error('postMovie error:', error);
+  }
+}
+
+// Edit movie form uses this generator to change title and description
+function* editMovieSaga(action) {
+  try {
+    // PUT the form data of user submit to the db
+    yield axios.put(`/api/movies/${action.payload}`);
+    
+    yield put({
+      type: 'FETCH_MOVIES' // calling the fetch to rerender the new movie data in the db
+    });
+  } catch (error) {
+    console.error('editMovie error:', error);
+  }
+}
+
+//MAKE SURE SQL TABLES ARE ADJUSTED FOR THIS TO FUNCTION PROPERLY
+//Details page lets user delete movie
+// Mostly implemnted to make this a full CRUD app
+function* deleteMovieSaga(action) {
+  try {
+    yield axios.delete(`/api/movies/${action.payload}`); // tells the server to make DELETE request with movie id
+    yield put({
+      type: 'FETCH_MOVIES' // rerender the movie gallery without delete movie
+    });
+  } catch (error) {
+    console.error('deleteMovie error:', error);
+  }
+}
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
+
+// REDUCERS
 // Used to store details for the movie that user clicked on
 const details = (state = {}, action) => {
   switch (action.type) {
@@ -116,7 +129,7 @@ const movies = (state = [], action) => {
   }
 }
 
-// Used to store the movie genres STRETCH GOAL
+// Used to store the movie genres 
 const genres = (state = [], action) => {
   switch (action.type) {
     case 'SET_GENRES':
