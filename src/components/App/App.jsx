@@ -5,6 +5,7 @@ import Details from '../Details/Details';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import AddMovie from '../AddMovie/AddMovie';
+import EditPage from '../EditPage/EditPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function App() {
     <>
     <div className="App">
       <h1>The Movies Saga!</h1>
+      <hr/>
       <Router>        
         <Route path="/" exact>
           <MovieList />
@@ -27,7 +29,9 @@ function App() {
         <Route path="/details/:id">
         <Details />
         </Route>
-        
+        <Route path='/edit/:id'>
+        <EditPage />
+        </Route>
         {/* Add Movie page */}
       </Router>
     </div>
@@ -36,3 +40,11 @@ function App() {
 }
 
 export default App;
+
+
+// Detail page Image Card
+// Detail page delete button
+
+// Code Comments
+// Read Me
+// Formatting

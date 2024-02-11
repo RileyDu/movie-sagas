@@ -15,7 +15,7 @@ export default function Details() {
     dispatch({ type: "FETCH_DETAILS", payload: params.id });
   }, [params.id]);
 
-//   console.log("details content", details);
+    console.log("details content", details);
 
   if (params.id === undefined) {
     return <h1>Loading...</h1>;
@@ -23,14 +23,40 @@ export default function Details() {
 
   return (
     <>
-      <h1 >IN DETAILS PAGE</h1>
-      <ul data-testid="movieDetails">
-        <li >{details.title}</li>
-        <li>{details.description}</li>
-        <li><img src={details.poster} alt={details.title} /></li>
-        <li>{details.genre}</li>
-      </ul>
-      <button onClick={() => history.push(`/`)} data-testid="toList">BACK TO HOME</button>
+    <hr/>
+      <div className="container-gallery">
+        <div className="details-container">
+          <div className="image-container">
+            <img src={details.poster} alt={details.title} />
+          </div>
+          <div className="info-container">
+            <h2>{details.title}</h2>
+            <p>{details.description}</p>
+            <p><strong>Genre:</strong> {details.genre}</p>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      {/* THIS IS ALL FOR SOME FANCY BUTTONS */}
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onClick={() => history.push(`/`)}
+        >
+          HOME
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onClick={() => history.push(`/edit/${params.id}`)}
+        >
+          EDIT
+        </button>
+        <button type="button" class="btn btn-secondary">
+          DELETE
+        </button>
+      </div>
     </>
   );
 }

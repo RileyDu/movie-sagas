@@ -3,3 +3,54 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.container-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.details-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 800px; 
+  margin: 20px;
+  align-items: center;
+}
+
+.image-container {
+  flex: 1;
+  margin-right: 30px;
+}
+
+img {
+  height: 30em;
+  width: auto;
+}
+
+.info-container {
+  flex: 2;
+}
+
+
+.movie-poster {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  font-size: 4em;
+  color: whitesmoke;
+  background-color: #060c1666;
+}
+
+.hover-poster:hover + .hover-title,
+.hover-title:hover {
+  opacity: 1;
+}
