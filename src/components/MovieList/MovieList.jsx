@@ -16,7 +16,7 @@ function MovieList() {
       <hr />
       <div className="container-gallery">
         <section className="movies">
-          <Row xs={1} md={4} className="g-4">
+          <Row xs={1} sm={3} md={4} className="g-4">
             {movies.map((movie) => (
               <Col key={movie.id}>
                 <MovieListItem movie={movie} />

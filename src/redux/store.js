@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, take } from 'redux-saga/effects';
 import axios from 'axios';
 
 // Create the rootSaga generator function
@@ -9,7 +9,8 @@ function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchAllMovies)
   yield takeEvery('FETCH_DETAILS', fetchDetails);
   yield takeEvery('POST_MOVIE', postMovie);
-  yield takeEvery('FETCH_GENRES', fetchGenresSaga)
+  yield takeEvery('FETCH_GENRES', fetchGenresSaga);
+  yield takeEvery('EDIT_MOVIE', editMovieSaga)
 }
 
 function* postMovie(action) {
@@ -22,6 +23,19 @@ function* postMovie(action) {
     });
   } catch (error) {
     console.error('postMovie error:', error);
+  }
+}
+
+function* editMovieSaga(action) {
+  try {
+    // Get the movies:
+    yield axios.put(`/api/movies/${action.payload.id}`, action.payload);
+    // // Set the value of the movies reducer:
+    yield put({
+      type: 'FETCH_MOVIES'
+    });
+  } catch (error) {
+    console.error('editMovie error:', error);
   }
 }
 
