@@ -46,22 +46,22 @@ export default function Details() {
       </div>
       <hr/>
       {/* THIS IS ALL FOR SOME FANCY BUTTONS */}
-      <div class="btn-group" role="group" aria-label="Basic example">
+      <div className="btn-group" role="group" aria-label="Basic example">
         <button
           type="button"
-          class="btn btn-secondary"
+          className="btn btn-secondary"
           onClick={() => history.push(`/`)}
         >
           HOME
         </button>
         <button
           type="button"
-          class="btn btn-secondary"
+          className="btn btn-secondary"
           onClick={() => history.push(`/edit/${params.id}`)}
         >
           EDIT
         </button>
-        <button type="button" class="btn btn-secondary" onClick={() => deleteMovie()}>
+        <button type="button" className="btn btn-secondary" onClick={() => deleteMovie()}>
           DELETE
         </button>
       </div>

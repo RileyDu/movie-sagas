@@ -4,7 +4,7 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-
+import { useSelector } from "react-redux";
 export default function EditPage() {
   const history = useHistory();
   const [movieTitle, setMovieTitle] = useState("");
@@ -12,6 +12,8 @@ export default function EditPage() {
   const [showAlert, setShowAlert] = useState(false);
   const params = useParams();
   const dispatch = useDispatch();
+  const details = useSelector((store) => store.details);
+
 
   const handleInputChangeTitle = (e) => {
     setMovieTitle(e.target.value);
@@ -22,8 +24,9 @@ export default function EditPage() {
   };
 
   useEffect(() => {
-    dispatch({ type: "FETCH_DETAILS", payload: params.id });
-  }, [dispatch, params.id]);
+setMovieTitle(details.title)
+setMovieDescription(details.description)
+  }, [params.id]);
 
   function postMovieEdit() {
     const changedMovieData = {
