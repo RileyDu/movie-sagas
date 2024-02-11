@@ -127,6 +127,7 @@ export default function AddMovie() {
           <label for="genreSelect">Select Genre</label>
         </div>
       </form>
+      <hr/>
       <Button onClick={() => history.push(`/`)}>GO BACK</Button>
       <Button
         onClick={() => {
