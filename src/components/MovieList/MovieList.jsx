@@ -14,7 +14,7 @@ function MovieList() {
     <main>
       <Button onClick={() => history.push(`/addMovie`)}>ADD NEW MOVIE</Button>
       <hr />
-      <div className="container">
+      <div className="container-gallery">
         <section className="movies">
           <Row xs={1} md={4} className="g-4">
             {movies.map((movie) => (

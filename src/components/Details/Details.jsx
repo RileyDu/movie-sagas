@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { Button } from "react-bootstrap";
 
 export default function Details() {
   const params = useParams();
@@ -24,14 +23,21 @@ export default function Details() {
 
   return (
     <>
-      <ul>
-        <li>{details.title}</li>
-        <li>{details.description}</li>
-        <li>
-          <img src={details.poster} alt={details.title} />
-        </li>
-        <li>{details.genre}</li>
-      </ul>
+    <hr/>
+      <div className="container-gallery">
+        <div className="details-container">
+          <div className="image-container">
+            <img src={details.poster} alt={details.title} />
+          </div>
+          <div className="info-container">
+            <h2>{details.title}</h2>
+            <p>{details.description}</p>
+            <p><strong>Genre:</strong> {details.genre}</p>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      {/* THIS IS ALL FOR SOME FANCY BUTTONS */}
       <div class="btn-group" role="group" aria-label="Basic example">
         <button
           type="button"
@@ -40,7 +46,11 @@ export default function Details() {
         >
           HOME
         </button>
-        <button type="button" class="btn btn-secondary"  onClick={() => history.push(`/edit`)}>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onClick={() => history.push(`/edit`)}
+        >
           EDIT
         </button>
         <button type="button" class="btn btn-secondary">
