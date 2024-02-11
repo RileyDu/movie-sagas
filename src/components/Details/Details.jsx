@@ -15,7 +15,7 @@ export default function Details() {
     dispatch({ type: "FETCH_DETAILS", payload: params.id });
   }, [params.id]);
 
-  //   console.log("details content", details);
+    console.log("details content", details);
 
   if (params.id === undefined) {
     return <h1>Loading...</h1>;
@@ -49,7 +49,7 @@ export default function Details() {
         <button
           type="button"
           class="btn btn-secondary"
-          onClick={() => history.push(`/edit`)}
+          onClick={() => history.push(`/edit/${params.id}`)}
         >
           EDIT
         </button>

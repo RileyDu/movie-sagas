@@ -1,4 +1,7 @@
-import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -7,14 +10,8 @@ export default function EditPage() {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieDescription, setMovieDescription] = useState("");
   const [showAlert, setShowAlert] = useState(false);
-  const { id } = useParams();
-const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log("id:", id);
-    dispatch({ type: "FETCH_DETAILS", payload: id });
-  }, [id]);
-
+  const params = useParams();
+  const dispatch = useDispatch();
 
   const handleInputChangeTitle = (e) => {
     setMovieTitle(e.target.value);
@@ -24,13 +21,16 @@ const dispatch = useDispatch();
     setMovieDescription(e.target.value);
   };
 
-  function postMovieEdit() {
+  useEffect(() => {
+    dispatch({ type: "FETCH_DETAILS", payload: params.id });
+  }, [dispatch, params.id]);
 
+  function postMovieEdit() {
     const changedMovieData = {
-        title: movieTitle,
-        description: movieDescription,
-        id: id
-    }
+      title: movieTitle,
+      description: movieDescription,
+      id: params.id,
+    };
     console.log("checking payload of submit", changedMovieData);
 
     if (!movieTitle || !movieDescription) {
@@ -44,12 +44,11 @@ const dispatch = useDispatch();
     });
     setMovieTitle("");
     setMovieDescription("");
-    history.push(`/details/${id}`);
+    history.push(`/details/${params.id}`);
   }
-  
+
   return (
     <>
-      <h1>IN EDIT PAGE</h1>
       {showAlert && (
         <div className="alert alert-dismissible alert-danger">
           <button
@@ -85,15 +84,14 @@ const dispatch = useDispatch();
             <label for="textArea">Enter Movie Description</label>
           </div>
         </div>
-        </form>
-
+      </form>
 
       {/* THIS IS ALL FOR SOME FANCY BUTTONS */}
       <div class="btn-group" role="group" aria-label="Basic example">
         <button
           type="button"
           class="btn btn-secondary"
-          onClick={() => history.push(`/details/:id`)}
+          onClick={() => history.push(`/details/${params.id}`)}
         >
           CANCEL
         </button>

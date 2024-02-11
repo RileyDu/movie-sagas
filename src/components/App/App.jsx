@@ -29,7 +29,7 @@ function App() {
         <Route path="/details/:id">
         <Details />
         </Route>
-        <Route path='/edit'>
+        <Route path='/edit/:id'>
         <EditPage />
         </Route>
         {/* Add Movie page */}
