@@ -13,7 +13,7 @@ body {
 .details-container {
   display: flex;
   justify-content: space-between;
-  max-width: 800px; 
+  max-width: 800px;
   margin: 20px;
   align-items: center;
 }
@@ -26,12 +26,19 @@ body {
 img {
   height: 30em;
   width: auto;
+  border: 4px solid #3498db;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease-in-out;
+}
+
+img:hover {
+  border-color: white;
 }
 
 .info-container {
   flex: 2;
 }
-
 
 .movie-poster {
   position: relative;
