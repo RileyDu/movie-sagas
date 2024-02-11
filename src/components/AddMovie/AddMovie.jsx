@@ -73,7 +73,7 @@ export default function AddMovie() {
         </div>
       )}
       <form>
-        <div class="form-group">
+        <div class="form-group container">
           <div class="form-floating mb-3">
             <input
               type="text"
@@ -106,7 +106,7 @@ export default function AddMovie() {
             <label for="textArea">Enter Movie Description</label>
           </div>
         </div>
-        <div class="form-group form-floating mb-3">
+        <div class="form-group form-floating mb-3 container">
           <select
             class="form-select"
             id="genreSelect"

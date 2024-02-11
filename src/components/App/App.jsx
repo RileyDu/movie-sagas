@@ -17,6 +17,7 @@ function App() {
     <>
     <div className="App">
       <h1>The Movies Saga!</h1>
+      <hr/>
       <Router>        
         <Route path="/" exact>
           <MovieList />
@@ -37,8 +38,7 @@ function App() {
 
 export default App;
 
-// MovieListItem Image Card
-// MovieList Grid
+
 // Detail page Image Card
 // Detail page delete button
 
