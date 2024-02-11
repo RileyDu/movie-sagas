@@ -1,33 +1,32 @@
-import {
-  useHistory,
-  useParams,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory,useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+
+
 export default function EditPage() {
-  const history = useHistory();
-  const [movieTitle, setMovieTitle] = useState("");
-  const [movieDescription, setMovieDescription] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
-  const params = useParams();
   const dispatch = useDispatch();
-  const details = useSelector((store) => store.details);
+  const history = useHistory();
+  const params = useParams();
+  const [movieDescription, setMovieDescription] = useState(""); // local state that is populated with data from db
+  const [movieTitle, setMovieTitle] = useState(""); // local state that is populated with data from db
+  const [showAlert, setShowAlert] = useState(false); // alert will trigger if form inputs are empty
+  const details = useSelector((store) => store.details); // talks to reducer to get details to populate inputs
 
-
-  const handleInputChangeTitle = (e) => {
+  const handleInputChangeTitle = (e) => { // recording each change in form inputs in local state
     setMovieTitle(e.target.value);
   };
 
-  const handleInputChangeDesc = (e) => {
+  const handleInputChangeDesc = (e) => { // recording each change in form inputs in local state
     setMovieDescription(e.target.value);
   };
 
-  useEffect(() => {
-setMovieTitle(details.title)
-setMovieDescription(details.description)
+  useEffect(() => { // when page loads set local state from the store
+    setMovieTitle(details.title);
+    setMovieDescription(details.description);
   }, [params.id]);
 
+  //Save button triggers a post with local state through an object
   function postMovieEdit() {
     const changedMovieData = {
       title: movieTitle,
@@ -36,22 +35,24 @@ setMovieDescription(details.description)
     };
     console.log("checking payload of submit", changedMovieData);
 
+    //alert triggers if form values are undefined
     if (!movieTitle || !movieDescription) {
       setShowAlert(true);
       return;
     }
 
     dispatch({
-      type: "EDIT_MOVIE",
+      type: "EDIT_MOVIE", // talk to the sagas that we have a PUT request to the DB
       payload: changedMovieData,
     });
-    setMovieTitle("");
-    setMovieDescription("");
-    history.push(`/details/${params.id}`);
+    setMovieTitle(""); // this is clearing the form on submit, might not be needed ?
+    setMovieDescription(""); // this is clearing the form on submit, might not be needed ?
+    history.push(`/details/${params.id}`); // takes user back to details page to see their changes right away
   }
 
   return (
     <>
+    {/* THIS IS HIDDEN UNTIL USER TRIGGERS A BAD SUBMIT OF FORM */}
       {showAlert && (
         <div className="alert alert-dismissible alert-danger">
           <button
@@ -88,7 +89,7 @@ setMovieDescription(details.description)
           </div>
         </div>
       </form>
-
+        {/* form uses local state to fill and record to assign to an object to PUT */}
       {/* THIS IS ALL FOR SOME FANCY BUTTONS */}
       <div class="btn-group" role="group" aria-label="Basic example">
         <button

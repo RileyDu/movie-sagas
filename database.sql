@@ -21,6 +21,7 @@ CREATE TABLE "movies_genres" (
   "genre_id" INT REFERENCES "genres" NOT NULL
 );
 
+-- THIS IS NEEDED TO ACTIVATE DELETE BUTTON FUNCTIONALITY
 ALTER TABLE movies_genres
 DROP CONSTRAINT movies_genres_movie_id_fkey,
 ADD CONSTRAINT movies_genres_movie_id_fkey

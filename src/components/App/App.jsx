@@ -19,11 +19,11 @@ function App() {
       <div className="App">
         <hr />
         <h1>The Movie Gallery!</h1>
-        <hr /> 
+        <hr />
         {/* // header that lives on every page */}
         <Router>
           <Route path="/" exact>
-            <MovieList /> 
+            <MovieList />
             {/* the home page, displays a gallery grid of movies */}
           </Route>
           <Route path="/addMovie">
@@ -46,5 +46,5 @@ function App() {
 
 export default App;
 
-// Code Comments
-// Formatting
+// DEAR FUTURE GUEST 
+/* DELETE BUTTON MIGHT NEED A DB.SQL ADJUSTMENT FOR CASCADE TO WORK, CHECK database.sql FILE IF NOT WORKING */

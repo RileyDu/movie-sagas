@@ -1,37 +1,39 @@
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect } from "react";
 
 export default function Details() {
+  const details = useSelector((store) => store.details); // talks to store reducer, object and keys are used to render data
   const params = useParams();
-  const details = useSelector((store) => store.details);
   const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // when page loads talk to sagas and reducers to get selected movie's details
     console.log("params.id:", params.id);
     dispatch({ type: "FETCH_DETAILS", payload: params.id });
   }, [params.id]);
 
-    console.log("details content", details);
+  console.log("details content", details);
 
   if (params.id === undefined) {
     return <h1>Loading...</h1>;
   }
 
-  function deleteMovie(){
+  function deleteMovie() {
+    //delete button triggers this and sends a DELETE request to db w/id
     dispatch({
       type: "DELETE_MOVIE",
       payload: params.id,
     });
-    history.push(`/`);
+    history.push(`/`); // takes user back to home
   }
 
   return (
     <>
-    <hr/>
+      <hr />
       <div className="container-gallery">
         <div className="details-container">
           <div className="image-container">
@@ -40,11 +42,13 @@ export default function Details() {
           <div className="info-container">
             <h2>{details.title}</h2>
             <p>{details.description}</p>
-            <p><strong>Genre:</strong> {details.genre}</p>
+            <p>
+              <strong>Genre:</strong> {details.genre}
+            </p>
           </div>
         </div>
       </div>
-      <hr/>
+      <hr />
       {/* THIS IS ALL FOR SOME FANCY BUTTONS */}
       <div className="btn-group" role="group" aria-label="Basic example">
         <button
@@ -61,9 +65,14 @@ export default function Details() {
         >
           EDIT
         </button>
-        <button type="button" className="btn btn-secondary" onClick={() => deleteMovie()}>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={() => deleteMovie()}
+        >
           DELETE
         </button>
+        {/* DELETE BUTTON MIGHT NEED A DB.SQL ADJUSTMENT FOR CASCADE TO WORK, CHECK FILE IF NOT WORKING */}
       </div>
     </>
   );
