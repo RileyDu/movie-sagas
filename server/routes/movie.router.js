@@ -6,7 +6,7 @@ const pool = require("../modules/pool");
 router.get("/", (req, res) => {
   const query = `
     SELECT * FROM "movies"
-      ORDER BY "id" ASC;
+      ORDER BY "id" DESC;
   `;
   pool
     .query(query)
@@ -45,12 +45,13 @@ router.get("/:id", (req, res) => {
 //EDIT PAGE PUT
 router.put("/:id", (req, res) => {
   const updatedMovie = req.body;
+  console.log('updated movie contenets', req.body);
   // req.body should contain the data needed for PUT
   const queryText = `
     UPDATE "movies"
       SET 
         "title"=$1,
-        "description" =$2
+        "description"=$2
       WHERE
         "id"=$3;
   `;

@@ -5,13 +5,13 @@ import { useSelector } from "react-redux";
 
 
 export default function EditPage() {
+  const details = useSelector((store) => store.details); // talks to reducer to get details to populate inputs
   const dispatch = useDispatch();
   const history = useHistory();
   const params = useParams();
-  const [movieDescription, setMovieDescription] = useState(""); // local state that is populated with data from db
-  const [movieTitle, setMovieTitle] = useState(""); // local state that is populated with data from db
+  const [movieDescription, setMovieDescription] = useState(details.description); // local state that is populated with data from db
+  const [movieTitle, setMovieTitle] = useState(details.title); // local state that is populated with data from db
   const [showAlert, setShowAlert] = useState(false); // alert will trigger if form inputs are empty
-  const details = useSelector((store) => store.details); // talks to reducer to get details to populate inputs
 
   const handleInputChangeTitle = (e) => { // recording each change in form inputs in local state
     setMovieTitle(e.target.value);
@@ -21,10 +21,10 @@ export default function EditPage() {
     setMovieDescription(e.target.value);
   };
 
-  useEffect(() => { // when page loads set local state from the store
-    setMovieTitle(details.title);
-    setMovieDescription(details.description);
-  }, [params.id]);
+  // useEffect(() => { // when page loads set local state from the store
+  //   setMovieTitle(details.title);
+  //   setMovieDescription(details.description);
+  // }, [params.id]);
 
   //Save button triggers a post with local state through an object
   function postMovieEdit() {
@@ -40,7 +40,6 @@ export default function EditPage() {
       setShowAlert(true);
       return;
     }
-
     dispatch({
       type: "EDIT_MOVIE", // talk to the sagas that we have a PUT request to the DB
       payload: changedMovieData,

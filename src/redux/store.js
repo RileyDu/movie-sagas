@@ -80,7 +80,7 @@ function* postMovie(action) {
 function* editMovieSaga(action) {
   try {
     // PUT the form data of user submit to the db
-    yield axios.put(`/api/movies/${action.payload}`);
+    yield axios.put(`/api/movies/${action.payload.id}`, action.payload);
     
     yield put({
       type: 'FETCH_MOVIES' // calling the fetch to rerender the new movie data in the db
